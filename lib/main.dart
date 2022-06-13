@@ -57,7 +57,7 @@ class CustomSearchDelegate extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        icon: Icon(Icons.clear),
+        icon: Icon(Icons.clear, color: Colors.grey,),
       ),
     ];
   }
@@ -69,7 +69,7 @@ class CustomSearchDelegate extends SearchDelegate {
           onPressed: () {
             close(context, null);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.grey,),
         );
   }
 
@@ -197,8 +197,7 @@ class _HomeState extends State<Home> {
               actions:[
                 IconButton(
                   onPressed: () {
-                    showSearch(context: context, delegate: CustomSearchDelegate(
-                      ),
+                    showSearch(context: context, delegate: CustomSearchDelegate(),
                     );
                   }, 
                   icon: const Icon(Icons.search)
