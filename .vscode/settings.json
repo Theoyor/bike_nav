@@ -1,0 +1,23 @@
+{
+ 
+  "editor.bracketPairColorization.enabled": true,
+  "workbench.colorCustomizations": {
+    "[Monokai Pro]": {
+    "editorInlayHint.background": "#4949498e",
+    "editorInlayHint.foreground": "#949494cc",
+    "editorInlayHint.parameterBackground": "#4949498e",
+    "editorInlayHint.parameterForeground": "#949494cc",
+    "editorInlayHint.typeBackground": "#4949498e",
+    "editorInlayHint.typeForeground": "#949494cc",
+
+    "editorBracketHighlight.foreground1": "#779bb8",
+    "editorBracketHighlight.foreground2": "#b6965e",
+    "editorBracketHighlight.foreground3": "#946aa1",
+    "editorBracketHighlight.foreground4": "#3c777e",
+    "editorBracketHighlight.foreground5": "#6a884c",
+    "editorBracketHighlight.foreground6": "#8f97a5",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#c97b7e"
+  }
+    
+    },
+}
