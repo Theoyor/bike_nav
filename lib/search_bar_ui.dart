@@ -3,6 +3,8 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 
 class SearchBarUI extends StatelessWidget{
+  SearchBarUI({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
