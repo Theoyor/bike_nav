@@ -1,5 +1,5 @@
 import 'package:bike_nav/main.dart';
-import 'package:bike_nav/savedSearchDelegate.dart';
+import 'package:bike_nav/saved_search_delegate.dart';
 import 'package:flutter/material.dart';
 
 class SavedList extends StatelessWidget{

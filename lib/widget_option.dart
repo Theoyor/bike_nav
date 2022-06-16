@@ -1,17 +1,14 @@
-import 'package:bike_nav/main.dart';
-import 'package:bike_nav/savedList.dart';
-import 'package:bike_nav/searchBarUi.dart';
+import 'package:bike_nav/saved_list.dart';
+import 'package:bike_nav/search_bar_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import "package:material_floating_search_bar/material_floating_search_bar.dart";
+
 
 class WidgetOption extends StatelessWidget{
-  WidgetOption(this.index);
+  
   final int index;
 
-
-    
-
+  WidgetOption({Key? key, required this.index}) : super(key: key);
   
 
   @override
@@ -31,9 +28,7 @@ class WidgetOption extends StatelessWidget{
     }else if(index == 1){
       return SavedList();
     }else{
-      return const Center(
-       child:  Text("index out of bounds")
-      );
+      throw IndexError(index, 1);
     }
   }
 

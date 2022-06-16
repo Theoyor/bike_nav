@@ -1,7 +1,5 @@
-import 'package:bike_nav/widgetOption.dart';
+import 'package:bike_nav/widget_option.dart';
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:photo_view/photo_view.dart';
 
 void main()=> runApp(MyApp());
 
@@ -36,7 +34,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: WidgetOption(_currentIndex),
+      body: WidgetOption(index: _currentIndex),
 
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -56,12 +54,7 @@ class _HomeState extends State<Home> {
       ),
 
     );
-  }
-
-
- 
-  
- 
+  } 
 }
 
 
