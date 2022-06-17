@@ -52,7 +52,7 @@ class _SplashState extends State<Splash> {
     sharedPreferences.setString('current-address', currentAddress);
 
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (_) => Home()), (route) => false);
+        MaterialPageRoute(builder: (_) => Frame()), (route) => false);
   }
 
   @override
@@ -63,12 +63,12 @@ class _SplashState extends State<Splash> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(
-            CupertinoIcons.car_detailed,
+            Icons.pedal_bike,
             color: Colors.white,
             size: 120,
           ),
           Text(
-            'Mapbox Cabs',
+            'Bike Navigator',
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge

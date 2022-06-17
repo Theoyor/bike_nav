@@ -2,7 +2,7 @@ import 'package:bike_nav/own/saved_list.dart';
 import 'package:bike_nav/own/search_bar_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-
+import 'package:bike_nav/own/home.dart';
 
 class WidgetOption extends StatelessWidget{
   
@@ -14,17 +14,7 @@ class WidgetOption extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     if (index ==0 ){
-          return Stack(
-        fit: StackFit.expand,
-        children: [
-          PhotoView(
-            imageProvider: AssetImage("assets/map(2).png"),
-            initialScale: 2.0,
-          ), 
-          SearchBarUI(),
-        ],
-      );
-
+      return Home();
     }else if(index == 1){
       return SavedList();
     }else{

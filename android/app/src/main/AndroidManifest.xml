@@ -8,7 +8,7 @@
     <uses-feature android:name="android.hardware.location.gps"/>
     <uses-feature android:glEsVersion="0x00030001" android:required="true" />
     <application
-        android:label="Cabs"
+        android:label="Bike Nav"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

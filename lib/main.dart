@@ -18,20 +18,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: Frame(),
     );
   }
 }
 
 
-class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+class Frame extends StatefulWidget {
+  Frame({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _FrameState createState() => _FrameState();
 }
 
-class _HomeState extends State<Home> {
+class _FrameState extends State<Frame> {
   
   int _currentIndex = 0;
   TextEditingController editingController = TextEditingController();
