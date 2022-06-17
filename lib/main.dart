@@ -1,7 +1,17 @@
-import 'package:bike_nav/widget_option.dart';
+import 'package:bike_nav/own/widget_option.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main()=> runApp(MyApp());
+
+late SharedPreferences sharedPreferences;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  sharedPreferences = await SharedPreferences.getInstance();
+  await dotenv.load(fileName: "assets/config/.env");
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
