@@ -5,7 +5,7 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/mapbox_handler.dart';
 import '../main.dart';
-//import '../screens/home.dart';
+import '../screens/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -43,8 +43,7 @@ class _SplashState extends State<Splash> {
         LatLng(_locationData.latitude!, _locationData.longitude!);
 
     // Get the current user address
-    String currentAddress =
-        (await getParsedReverseGeocoding(currentLocation))['place'];
+    String currentAddress = (await getParsedReverseGeocoding(currentLocation))['place'];
 
     // Store the user location in sharedPreferences
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
@@ -52,7 +51,7 @@ class _SplashState extends State<Splash> {
     sharedPreferences.setString('current-address', currentAddress);
 
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (_) => Frame()), (route) => false);
+        MaterialPageRoute(builder: (_) =>  Frame()), (route) => false);
   }
 
   @override
@@ -63,12 +62,12 @@ class _SplashState extends State<Splash> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(
-            Icons.pedal_bike,
+            CupertinoIcons.car_detailed,
             color: Colors.white,
             size: 120,
           ),
           Text(
-            'Bike Navigator',
+            'Mapbox Cabs',
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge

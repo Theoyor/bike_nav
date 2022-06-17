@@ -38,8 +38,10 @@ Future<List> getParsedResponseForQuery(String value) async {
 
 // ----------------------------- Mapbox Reverse Geocoding -----------------------------
 Future<Map> getParsedReverseGeocoding(LatLng latLng) async {
-  var response =
-      json.decode(await getReverseGeocodingGivenLatLngUsingMapbox(latLng));
+final response =  Map<String, dynamic>.from(await getReverseGeocodingGivenLatLngUsingMapbox(latLng));
+
+  //var response =
+    //  json.decode(await getReverseGeocodingGivenLatLngUsingMapbox(latLng));
   Map feature = response['features'][0];
   Map revGeocode = {
     'name': feature['text'],

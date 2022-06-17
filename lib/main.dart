@@ -1,4 +1,5 @@
 import 'package:bike_nav/own/widget_option.dart';
+import 'package:bike_nav/ui/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Frame(),
+      home: Splash(),
     );
   }
 }
