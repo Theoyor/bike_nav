@@ -45,3 +45,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# security:
+*gradle.properties
+*.env
+*android/app/src/main/res/values/strings.xml
