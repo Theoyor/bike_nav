@@ -1,10 +1,37 @@
+import 'dart:ffi';
+
+import 'package:bike_nav/helpers/mapbox_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-
-class SearchBarUI extends StatelessWidget{
+class SearchBarUI extends StatefulWidget {
   SearchBarUI({Key? key}) : super(key: key);
+
+  @override
+  State<SearchBarUI> createState() => _SearchBarUIState();
+}
+
+
+class _SearchBarUIState extends State<SearchBarUI> {
+
+  List response = [];
+  bool isLoading = false;
+
+  _searchHandler(String query) async {
+    setState(() {
+      isLoading = true;
+    });
+    getParsedResponseForQuery(query).then(
+      (value) => {
+        setState(() {
+          isLoading = false;
+        response = value;
+        })
+      }
+    );
+  }
   
+
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
@@ -16,7 +43,7 @@ class SearchBarUI extends StatelessWidget{
             elevation: 4.0,
             physics: BouncingScrollPhysics(),
             onQueryChanged: (query){
-              //Your methods will be here
+              _searchHandler(query);
             },
             //showDrawerHamburger: false,
             transitionCurve: Curves.easeInOut,
@@ -45,10 +72,37 @@ class SearchBarUI extends StatelessWidget{
                     color: Colors.white,
                     child: Column(
                       children: [
-                        ListTile(
-                          title: Text('Home'),
-                          subtitle: Text('more info here........'),
-                        ),
+                        isLoading
+                  ? const LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                  : Container(),
+                  SizedBox(
+                    height: 200.0,
+                    width: double.infinity,
+                    child: ListView.builder(
+                          itemCount: response.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: [
+                                ListTile(
+                                  onTap: () {
+                                    
+                                  },
+                                  leading: const SizedBox(
+                                    height: double.infinity,
+                                    child: CircleAvatar(child: Icon(Icons.map)),
+                                  ),
+                                  title: Text(response[index]['name'],
+                                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                                  subtitle: Text(response[index]['address'],
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                const Divider(),
+                              ],
+                            );
+                          },
+                        ))
+                        
                       ],
                     ),
                   ),

@@ -21,8 +21,7 @@ Future<List> getParsedResponseForQuery(String value) async {
   if (query == '') return parsedResponses;
 
   // Else search and then send response
-  var response = json.decode(await getSearchResultsFromQueryUsingMapbox(query));
-
+  final response =  Map<String, dynamic>.from(await getSearchResultsFromQueryUsingMapbox(query));
   List features = response['features'];
   for (var feature in features) {
     Map response = {
