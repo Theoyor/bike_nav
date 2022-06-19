@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bike_nav/main.dart';
 import 'package:bike_nav/own/search_bar_ui.dart';
+import 'package:bike_nav/screens/review_ride.dart';
 import 'package:bike_nav/widgets/marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -35,7 +36,7 @@ class _ReviewDestinationState extends State<ReviewDestination> {
   void initState() {
     
     // initialise initialCameraPosition, address and trip end points
-    _initialCameraPosition = CameraPosition(target: getTripLatLngFromSharedPrefs('destination'), zoom: 12);
+    _initialCameraPosition = CameraPosition(target: getTripLatLngFromSharedPrefs('destination'), zoom: 16);
 
     // initialize destination
     destination = sharedPreferences.getString("destination")!;
@@ -43,6 +44,21 @@ class _ReviewDestinationState extends State<ReviewDestination> {
 
     super.initState();
   }
+
+    _handleStart() async {
+    sharedPreferences.setString('source', getCurrentJSONAddressFromSharedPrefs());
+
+    LatLng sourceLatLng = getCurrentLatLngFromSharedPrefs();
+    LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
+    Map modifiedResponse = await getDirectionsAPIResponse(sourceLatLng, destinationLatLng);
+    if (!mounted) return;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => ReviewRide(modifiedResponse: modifiedResponse,)));
+    
+  }
+
 
 
   _onMapCreated(MapboxMapController controller) async {
@@ -111,10 +127,10 @@ class _ReviewDestinationState extends State<ReviewDestination> {
 
                         ),
                         onPressed: (){
-                          
+                          _handleStart();
                         }, 
-                        icon: const Icon(Icons.navigation),
-                        label: const Text("Start Navigation")
+                        icon: const Icon(Icons.fork_left),
+                        label: const Text("Find Route")
                       )
                     ],
                   )

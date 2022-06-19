@@ -14,6 +14,10 @@ String getCurrentAddressFromSharedPrefs() {
   return sharedPreferences.getString('current-address')!;
 }
 
+String getCurrentJSONAddressFromSharedPrefs(){
+  return sharedPreferences.getString('unformatted-current-address')!;
+}
+
 LatLng getTripLatLngFromSharedPrefs(String type) {
 
    if (type == 'source') {

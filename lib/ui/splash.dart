@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -39,16 +41,16 @@ class _SplashState extends State<Splash> {
 
     // Get the current user location
     LocationData _locationData = await _location.getLocation();
-    LatLng currentLocation =
-        LatLng(_locationData.latitude!, _locationData.longitude!);
+    LatLng currentLocation = LatLng(_locationData.latitude!, _locationData.longitude!);
 
     // Get the current user address
-    String currentAddress = (await getParsedReverseGeocoding(currentLocation))['place'];
+    var currentAddress = await getParsedReverseGeocoding(currentLocation);
 
     // Store the user location in sharedPreferences
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
     sharedPreferences.setDouble('longitude', _locationData.longitude!);
-    sharedPreferences.setString('current-address', currentAddress);
+    sharedPreferences.setString('unformatted-current-address', json.encode(currentAddress));
+    sharedPreferences.setString('current-address', currentAddress['place']);
 
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (_) =>  Frame()), (route) => false);
