@@ -1,8 +1,17 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:bike_nav/helpers/mapbox_handler.dart';
+import 'package:bike_nav/helpers/shared_prefs.dart';
+import 'package:bike_nav/own/review_destination.dart';
+import 'package:bike_nav/screens/review_ride.dart';
 import 'package:flutter/material.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+late SharedPreferences sharedPreferences;
+
 
 class SearchBarUI extends StatefulWidget {
   SearchBarUI({Key? key}) : super(key: key);
@@ -29,6 +38,19 @@ class _SearchBarUIState extends State<SearchBarUI> {
         })
       }
     );
+  }
+
+  _handleTileTap(int index) async {
+    sharedPreferences.setString('destination', json.encode(response[index]));
+    LatLng sourceLatLng = getTripLatLngFromSharedPrefs('source');
+    LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
+    Map modifiedResponse = await getDirectionsAPIResponse(sourceLatLng, destinationLatLng);
+    if (!mounted) return;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => ReviewDestination(modifiedResponse: modifiedResponse)));
+    
   }
   
 
@@ -85,9 +107,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
                             return Column(
                               children: [
                                 ListTile(
-                                  onTap: () {
-                                    
-                                  },
+                                  onTap: _handleTileTap(index),
                                   leading: const SizedBox(
                                     height: double.infinity,
                                     child: CircleAvatar(child: Icon(Icons.map)),
@@ -109,7 +129,6 @@ class _SearchBarUIState extends State<SearchBarUI> {
                 ),
               );
             },
-
           );
   
 
