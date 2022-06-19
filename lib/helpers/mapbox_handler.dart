@@ -44,7 +44,7 @@ final response =  Map<String, dynamic>.from(await getReverseGeocodingGivenLatLng
   Map feature = response['features'][0];
   Map revGeocode = {
     'name': feature['text'],
-    'address': feature['place_name'].split('${feature['text']}, ')[1],
+    'address': feature['place_name'].split(RegExp('${feature['text']} ?\\d*, ') )[1],
     'place': feature['place_name'],
     'location': latLng
   };
@@ -54,8 +54,8 @@ final response =  Map<String, dynamic>.from(await getReverseGeocodingGivenLatLng
 // ----------------------------- Mapbox Directions API -----------------------------
 Future<Map> getDirectionsAPIResponse(
     LatLng sourceLatLng, LatLng destinationLatLng) async {
-  final response =
-      await getCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
+  final response = await getCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
+  
   Map geometry = response['routes'][0]['geometry'];
   num duration = response['routes'][0]['duration'];
   num distance = response['routes'][0]['distance'];

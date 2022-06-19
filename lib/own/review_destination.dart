@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:bike_nav/main.dart';
+import 'package:bike_nav/own/search_bar_ui.dart';
+import 'package:bike_nav/widgets/marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -8,8 +13,7 @@ import '../helpers/commons.dart';
 import '../widgets/review_ride_bottom_sheet.dart';
 
 class ReviewDestination extends StatefulWidget {
-  final Map modifiedResponse;
-  const ReviewDestination({Key? key, required this.modifiedResponse})
+  const ReviewDestination({Key? key})
       : super(key: key);
 
   @override
@@ -18,112 +22,111 @@ class ReviewDestination extends StatefulWidget {
 
 class _ReviewDestinationState extends State<ReviewDestination> {
   // Mapbox Maps SDK related
-  final List<CameraPosition> _kTripEndPoints = [];
   late MapboxMapController controller;
   late CameraPosition _initialCameraPosition;
 
-  // Directions API response related
-  late String distance;
-  late String dropOffTime;
-  late Map geometry;
+  List<Marker> _markers = [];
+  List<MarkerState> _markerStates = [];
 
+  
+  late String destination;
+  late LatLng destinationLatLng;
   @override
   void initState() {
-    // initialise distance, dropOffTime, geometry
-    _initialiseDirectionsResponse();
-
+    
     // initialise initialCameraPosition, address and trip end points
-    _initialCameraPosition = CameraPosition(
-        target: getCenterCoordinatesForPolyline(geometry), zoom: 11);
+    _initialCameraPosition = CameraPosition(target: getTripLatLngFromSharedPrefs('destination'), zoom: 12);
 
-    for (String type in ['source', 'destination']) {
-      _kTripEndPoints
-          .add(CameraPosition(target: getTripLatLngFromSharedPrefs(type)));
-    }
+    // initialize destination
+    destination = sharedPreferences.getString("destination")!;
+    destinationLatLng = getTripLatLngFromSharedPrefs('destination');
+
     super.initState();
   }
 
-  _initialiseDirectionsResponse() {
-    distance = (widget.modifiedResponse['distance'] / 1000).toStringAsFixed(1);
-    dropOffTime = getDropOffTime(widget.modifiedResponse['duration']);
-    geometry = widget.modifiedResponse['geometry'];
-  }
 
   _onMapCreated(MapboxMapController controller) async {
     this.controller = controller;
   }
 
   _onStyleLoadedCallback() async {
-    for (int i = 0; i < _kTripEndPoints.length; i++) {
-      String iconImage = i == 0 ? 'circle' : 'square';
-      await controller.addSymbol(
-        SymbolOptions(
-          geometry: _kTripEndPoints[i].target,
-          iconSize: 0.1,
-          iconImage: "assets/icon/$iconImage.png",
-        ),
-      );
-    }
-    _addSourceAndLineLayer();
+    
   }
 
   _addSourceAndLineLayer() async {
-    // Create a polyLine between source and destination
-    final _fills = {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "id": 0,
-          "properties": <String, dynamic>{},
-          "geometry": geometry,
-        },
-      ],
-    };
-
-    // Add new source and lineLayer
-    await controller.addSource("fills", GeojsonSourceProperties(data: _fills));
-    await controller.addLineLayer(
-      "fills",
-      "lines",
-      LineLayerProperties(
-        lineColor: Colors.indigo.toHexStringRGB(),
-        lineCap: "round",
-        lineJoin: "round",
-        lineWidth: 3,
-      ),
-    );
+    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back)),
-        title: const Text('Review Ride'),
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: MapboxMap(
-                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                initialCameraPosition: _initialCameraPosition,
-                onMapCreated: _onMapCreated,
-                onStyleLoadedCallback: _onStyleLoadedCallback,
-                myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(11, 11),
+      
+      
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: MapboxMap(
+              accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+              trackCameraPosition: true,
+              initialCameraPosition: _initialCameraPosition,
+              onMapCreated: _onMapCreated,
+              onStyleLoadedCallback: _onStyleLoadedCallback,
+              myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+            ),
+          ),
+        Positioned(
+          bottom: 0,
+          child: SizedBox(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            child:Card(
+              elevation: 3.0,
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(json.decode(destination)["name"]),
+                    subtitle:Text(json.decode(destination)["address"]) ,
+                    trailing: const Icon(Icons.bookmark_outline)
+                  ),
+                  ButtonBar(
+                    children: [
+                      TextButton.icon(
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            )
+                          ),
+                          foregroundColor: MaterialStateProperty.all(Colors.white),
+                          backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return Colors.blue.shade800;
+                            }
+                            return Colors.blue.shade700;
+                          }
+                           
+                          ),
+
+                        ),
+                        onPressed: (){
+                          
+                        }, 
+                        icon: const Icon(Icons.navigation),
+                        label: const Text("Start Navigation")
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
-            reviewRideBottomSheet(context, distance, dropOffTime),
-          ],
-        ),
-      ),
-    );
+          ),),
+          
+          SearchBarUI(),
+        ]
+      )
+    )
+    ;
   }
 }
