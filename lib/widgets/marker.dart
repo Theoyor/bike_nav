@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 class Marker extends StatefulWidget {
@@ -64,12 +65,13 @@ class MarkerState extends State with TickerProviderStateMixin {
     }
 
     return Positioned(
-        left: _position.x / ratio - _iconSize / 2,
-        top: _position.y / ratio - _iconSize / 2,
-        child: RotationTransition(
-            turns: _animation,
-            child: Image.asset('assets/symbols/2.0x/custom-icon.png',
-                height: _iconSize)));
+      left: _position.x / ratio - _iconSize / 2,
+      top: _position.y / ratio - _iconSize / 2,
+      child: Icon(
+        Icons.location_on,
+        size: _iconSize,
+      ),
+    ); //Image.asset('assets/symbols/2.0x/custom-icon.png', height: _iconSize)));
   }
 
   void updatePosition(Point<num> point) {

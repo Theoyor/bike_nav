@@ -65,7 +65,7 @@ class _ReviewDestinationState extends State<ReviewDestination> {
 
 
   _onMapCreated(MapboxMapController controller) async {
-    this.controller = controller;
+    _mapController = controller;
     controller.addListener(() {
       if (controller.isCameraMoving) {
         _updateMarkerPosition();
@@ -107,7 +107,13 @@ class _ReviewDestinationState extends State<ReviewDestination> {
   
 
   _onStyleLoadedCallback() async {
-    addMarker(Point(100.0, 100.0), getTripLatLngFromSharedPrefs("destination") );
+    LatLng destination = getTripLatLngFromSharedPrefs("destination");
+
+    _mapController.toScreenLocation(destination).then((value){
+
+      Point<double> point = Point(value.x as double, value.y as double);
+      addMarker(point, destination );
+    });
   }
 
   @override
@@ -116,9 +122,7 @@ class _ReviewDestinationState extends State<ReviewDestination> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: MapboxMap(
+            MapboxMap(
               accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
               trackCameraPosition: true,
               initialCameraPosition: _initialCameraPosition,
@@ -127,7 +131,12 @@ class _ReviewDestinationState extends State<ReviewDestination> {
               onStyleLoadedCallback: _onStyleLoadedCallback,
               myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
             ),
-          ),
+            
+          IgnorePointer(
+            ignoring: true,
+            child: Stack(
+              children: _markers,
+            )),
         Positioned(
           bottom: 0,
           child: SizedBox(

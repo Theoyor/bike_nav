@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:mapbox_gl/mapbox_gl.dart';
 
@@ -40,9 +41,11 @@ Future<Map> getParsedReverseGeocoding(LatLng latLng) async {
 final response =  Map<String, dynamic>.from(await getReverseGeocodingGivenLatLngUsingMapbox(latLng));
 
   Map feature = response['features'][0];
+  List address = feature['place_name'].split(RegExp(', '));
+
   Map revGeocode = {
-    'name': feature['text'],
-    'address': feature['place_name'].split(RegExp('${feature['text']} ?\\d*, ') )[1],
+    'name': address[0],
+    'address': address.sublist(1).join(", "),
     'place': feature['place_name'],
     'location': latLng
   };
