@@ -2,22 +2,22 @@
 
 ## Home Screen
 
-[ ] Map click
-[ ] fahrradkarten
+- [ ] Map click
+- [ ] fahrradkarten
 
 ## Save-Screen
 
-[ ] Allow saving in local storage
-[ ] fetch data from maps
+- [ ] Allow saving in local storage
+- [ ] fetch data from maps
 
 ## Inspect location
 
-[ ] Location Marker
+- [ ] Location Marker
 
 ## View Route
 
 ## Navigation
 
-[ ] Automatische umdisponierung
+- [ ] Automatische umdisponierung
 
 ## Easy Navigation
