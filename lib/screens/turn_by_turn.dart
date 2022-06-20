@@ -44,7 +44,7 @@ class _TurnByTurnState extends State<TurnByTurn> {
         zoom: 18.0,
         voiceInstructionsEnabled: true,
         bannerInstructionsEnabled: true,
-        mode: MapBoxNavigationMode.drivingWithTraffic,
+        mode: MapBoxNavigationMode.cycling,
         isOptimized: true,
         units: VoiceUnits.metric,
         simulateRoute: true,

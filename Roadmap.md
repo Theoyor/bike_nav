@@ -1,8 +1,10 @@
 # To-Dos
 
 ## Home Screen
+
 [ ] Map click
 [ ] fahrradkarten
+
 ## Save-Screen
 
 [ ] Allow saving in local storage
@@ -15,5 +17,7 @@
 ## View Route
 
 ## Navigation
+
+[ ] Automatische umdisponierung
 
 ## Easy Navigation

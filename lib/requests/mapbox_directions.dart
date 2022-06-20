@@ -7,7 +7,7 @@ import '../helpers/dio_exceptions.dart';
 
 String baseUrl = 'https://api.mapbox.com/directions/v5/mapbox';
 String accessToken = dotenv.env['MAPBOX_ACCESS_TOKEN']!;
-String navType = 'driving';
+String navType = 'cycling';
 
 Dio _dio = Dio();
 

@@ -1,15 +1,10 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:bike_nav/helpers/mapbox_handler.dart';
-import 'package:bike_nav/helpers/shared_prefs.dart';
 import 'package:bike_nav/main.dart';
 import 'package:bike_nav/own/review_destination.dart';
-import 'package:bike_nav/screens/review_ride.dart';
 import 'package:flutter/material.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -34,7 +29,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
       (value) => {
         setState(() {
           isLoading = false;
-        response = value;
+          response = value;
         })
       }
     );
@@ -45,7 +40,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
     //sharedPreferences.setString('source', getCurrentAddressFromSharedPrefs());
     
     //LatLng sourceLatLng = getCurrentLatLngFromSharedPrefs();
-    LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
+    //LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
     //Map modifiedResponse = await getDirectionsAPIResponse(sourceLatLng, destinationLatLng);
     if (!mounted) return;
     Navigator.push(
