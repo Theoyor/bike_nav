@@ -1,7 +1,7 @@
 # To-Dos
 
 ## Home Screen
-[ ] Map click
+[x] Map click
 [ ] fahrradkarten
 ## Save-Screen
 
