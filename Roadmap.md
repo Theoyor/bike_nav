@@ -17,6 +17,7 @@
   - [ ] Straßennummern
   - [ ] Suchvorschläge zum Start (Empty Query oder gespeichert)
 - [ ] Suchliste Lupe entfernen
+- [ ] Suchliste Grafik aufhübschen
 
 ### Langfristig
 
@@ -31,9 +32,9 @@
 
 ### Bis Freitag
 
-- [ ] Location Marker
+- [x] Location Marker
 - [ ] Grafik der Card anpassen
-- [ ] Save Button Grafisch
+- [x] Save Button Grafisch
 
 ### Langfristig
 

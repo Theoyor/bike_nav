@@ -149,7 +149,7 @@ class _ReviewDestinationState extends State<ReviewDestination> {
                   ListTile(
                     title: Text(json.decode(destination)["name"]),
                     subtitle:Text(json.decode(destination)["address"]) ,
-                    trailing: const Icon(Icons.bookmark_outline)
+                    trailing: IconButton(onPressed: (){}, icon:Icon(Icons.bookmark_outline)), 
                   ),
                   ButtonBar(
                     children: [
