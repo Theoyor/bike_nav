@@ -119,35 +119,25 @@ class _ReviewDestinationState extends State<ReviewDestination> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-            MapboxMap(
-              accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-              trackCameraPosition: true,
-              initialCameraPosition: _initialCameraPosition,
-              onMapCreated: _onMapCreated,
-              onCameraIdle: _onCameraIdleCallback,
-              onStyleLoadedCallback: _onStyleLoadedCallback,
-              myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-            ),
-            
-          IgnorePointer(
-            ignoring: true,
-            child: Stack(
-              children: _markers,
-            )),
-        Positioned(
-          bottom: 0,
-          child: SizedBox(
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            child:Card(
-              elevation: 3.0,
-              child: Column(
+      bottomSheet: Container(
+        height: 150.0,
+        width: MediaQuery.of(context).size.width - 12.0,
+        decoration: const BoxDecoration(
+          borderRadius:  BorderRadius.only(
+            topLeft: Radius.circular(12.0),
+            topRight: Radius.circular(12.0),
+          ),
+        ),
+        child: Column(
                 children: [
                   ListTile(
-                    title: Text(json.decode(destination)["name"]),
+                    title: Text(
+                      json.decode(destination)["name"],
+                      style:const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold
+                      ),
+                      ),
                     subtitle:Text(json.decode(destination)["address"]) ,
                     trailing: IconButton(onPressed: (){}, icon:Icon(Icons.bookmark_outline)), 
                   ),
@@ -180,8 +170,25 @@ class _ReviewDestinationState extends State<ReviewDestination> {
                   )
                 ],
               ),
+      ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+            MapboxMap(
+              accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+              trackCameraPosition: true,
+              initialCameraPosition: _initialCameraPosition,
+              onMapCreated: _onMapCreated,
+              onCameraIdle: _onCameraIdleCallback,
+              onStyleLoadedCallback: _onStyleLoadedCallback,
+              myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
             ),
-          ),),
+            
+          IgnorePointer(
+            ignoring: true,
+            child: Stack(
+              children: _markers,
+            )),
           
           SearchBarUI(),
         ]

@@ -4,7 +4,7 @@
 
 ### Bis Freitag
 
-- [ ] MapBox Handler Parser anpassen
+- [x] MapBox Handler Parser anpassen
 
 ## Home Screen
 

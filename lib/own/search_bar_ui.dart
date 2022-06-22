@@ -37,10 +37,6 @@ class _SearchBarUIState extends State<SearchBarUI> {
 
   _handleTileTap(int index) async {
     sharedPreferences.setString('destination', json.encode(response[index]));
-    //sharedPreferences.setString('source', getCurrentAddressFromSharedPrefs());
-    //LatLng sourceLatLng = getCurrentLatLngFromSharedPrefs();
-    //LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
-    //Map modifiedResponse = await getDirectionsAPIResponse(sourceLatLng, destinationLatLng);
     if (!mounted) return;
     Navigator.push(
         context,
