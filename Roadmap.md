@@ -42,7 +42,7 @@
 
 ## View Route
 
-- [ ] Bottom Card Anpassen
+- [x] Bottom Card Anpassen
 - [x] Fahrrad Optimiert
 - [ ] Top-Bar austauschen
 - [ ] Farben und Ziel-Start Marker anpassen
