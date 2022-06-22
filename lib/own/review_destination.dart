@@ -119,13 +119,35 @@ class _ReviewDestinationState extends State<ReviewDestination> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Container(
-        height: 150.0,
-        width: MediaQuery.of(context).size.width - 12.0,
+      
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          MapboxMap(
+            accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+            trackCameraPosition: true,
+            initialCameraPosition: _initialCameraPosition,
+            onMapCreated: _onMapCreated,
+            onCameraIdle: _onCameraIdleCallback,
+            onStyleLoadedCallback: _onStyleLoadedCallback,
+            myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+          ),
+            
+          IgnorePointer(
+            ignoring: true,
+            child: Stack(
+              children: _markers,
+            )),
+          Positioned(
+            bottom: 0,
+            child: Container(
+        height: MediaQuery.of(context).size.height / 5,
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-          borderRadius:  BorderRadius.only(
-            topLeft: Radius.circular(12.0),
-            topRight: Radius.circular(12.0),
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
           ),
         ),
         child: Column(
@@ -171,24 +193,8 @@ class _ReviewDestinationState extends State<ReviewDestination> {
                 ],
               ),
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-            MapboxMap(
-              accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-              trackCameraPosition: true,
-              initialCameraPosition: _initialCameraPosition,
-              onMapCreated: _onMapCreated,
-              onCameraIdle: _onCameraIdleCallback,
-              onStyleLoadedCallback: _onStyleLoadedCallback,
-              myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-            ),
-            
-          IgnorePointer(
-            ignoring: true,
-            child: Stack(
-              children: _markers,
-            )),
+
+          ),
           
           SearchBarUI(),
         ]
