@@ -21,6 +21,15 @@ class _SearchBarUIState extends State<SearchBarUI> {
   List response = [];
   bool isLoading = false;
 
+
+  @override
+  void initState(){
+    super.initState();
+    getParsedResponseForQuery("B").then((value) {
+      response = value;
+    });
+  }
+
   _searchHandler(String query) async {
     setState(() {
       isLoading = true;
@@ -51,15 +60,14 @@ class _SearchBarUIState extends State<SearchBarUI> {
     return FloatingSearchBar(
             hint: 'Search...',
             openAxisAlignment: 0.0,
-            //maxWidth: 600,
+            height: 55.0,
             axisAlignment:0.0,
-            scrollPadding: EdgeInsets.only(top: 16,bottom: 20),
+            borderRadius: BorderRadius.all(Radius.circular(30.0)) ,
             elevation: 4.0,
             physics: BouncingScrollPhysics(),
             onQueryChanged: (query){
               _searchHandler(query);
             },
-            //showDrawerHamburger: false,
             transitionCurve: Curves.easeInOut,
             transitionDuration: Duration(milliseconds: 500),
             transition: CircularFloatingSearchBarTransition(),
@@ -69,7 +77,6 @@ class _SearchBarUIState extends State<SearchBarUI> {
                 showIfOpened: false,
                 child: CircularButton(icon: Icon(Icons.place),
                     onPressed: (){
-                  print('Places Pressed');
                     },),
               ),
               FloatingSearchBarAction.searchToClear(
@@ -78,11 +85,11 @@ class _SearchBarUIState extends State<SearchBarUI> {
             ],
             builder: (context, transition){
               return ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(30.0),
                 child: Material(
                   color: Colors.white,
                   child: Container(
-                    height: 200.0,
+                    height: MediaQuery.of(context).size.height * 0.75,
                     color: Colors.white,
                     child: Column(
                       children: [
@@ -91,7 +98,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
                   : Container(),
                   SizedBox(
-                    height: 200.0,
+                    height: MediaQuery.of(context).size.height * 0.75,
                     width: double.infinity,
                     child: ListView.builder(
                           itemCount: response.length,

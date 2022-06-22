@@ -7,8 +7,8 @@ import '../helpers/dio_exceptions.dart';
 
 String baseUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 String accessToken = dotenv.env['MAPBOX_ACCESS_TOKEN']!;
-String searchType = 'place%2Cpostcode%2Caddress';
-String searchResultsLimit = '5';
+String searchType = 'place%2Cpostcode%2Caddress%2Cpoi';
+String searchResultsLimit = '10';
 String proximity =
     '${sharedPreferences.getDouble('longitude')}%2C${sharedPreferences.getDouble('latitude')}';
 String country = 'de';

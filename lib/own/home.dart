@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
           accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
           initialCameraPosition: _initialCameraPosition,
           myLocationEnabled: true,
+          styleString: "mapbox://styles/mapbox/streets-v11",
         ),
         SearchBarUI(),
       ],

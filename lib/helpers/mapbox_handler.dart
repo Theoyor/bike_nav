@@ -10,7 +10,7 @@ import '../requests/mapbox_search.dart';
 // ----------------------------- Mapbox Search Query -----------------------------
 String getValidatedQueryFromQuery(String query) {
   // Remove whitespaces
-  String validatedQuery = query.trim();
+  String validatedQuery = query.replaceAll(" ", "%20");
   return validatedQuery;
 }
 
@@ -18,16 +18,17 @@ Future<List> getParsedResponseForQuery(String value) async {
   List parsedResponses = [];
 
   // If empty query send blank response
-  String query = getValidatedQueryFromQuery(value);
-  if (query == '') return parsedResponses;
+  //String query = getValidatedQueryFromQuery(value);
+  //if (query == '') return parsedResponses;
 
   // Else search and then send response
-  final response =  Map<String, dynamic>.from(await getSearchResultsFromQueryUsingMapbox(query));
+  final response =  Map<String, dynamic>.from(await getSearchResultsFromQueryUsingMapbox(value));
   List features = response['features'];
   for (var feature in features) {
+    List address = feature['place_name'].split(RegExp(', '));
     Map response = {
-      'name': feature['text'],
-      'address': feature['place_name'].split('${feature['text']}, ')[1],
+      'name': address[0],
+      'address': address.sublist(1).join(", "),
       'place': feature['place_name'],
       'location': LatLng(feature['center'][1], feature['center'][0])
     };

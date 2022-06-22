@@ -145,6 +145,14 @@ class _ReviewDestinationState extends State<ReviewDestination> {
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromARGB(255, 110, 110, 110),
+                blurRadius: 4.0,
+                spreadRadius: 0.0,
+                offset: Offset(0.0, -2.0), // shadow direction: bottom right
+            )
+        ],
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),

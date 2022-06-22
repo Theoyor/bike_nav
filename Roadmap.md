@@ -10,14 +10,14 @@
 
 ### Bis Freitag
 
-- [ ] fahrradkarten
-- [ ] Suchliste aufhübschen
-- [ ] Suchvorschläge anpassen
-  - [ ] POI
-  - [ ] Straßennummern
-  - [ ] Suchvorschläge zum Start (Empty Query oder gespeichert)
-- [ ] Suchliste Lupe entfernen
-- [ ] Suchliste Grafik aufhübschen
+- [x] fahrradkarten (nicht vorhanden)
+- [x] Suchliste aufhübschen
+- [x] Suchvorschläge anpassen
+  - [x] POI
+  - [x] Straßennummern
+  - [x] Suchvorschläge zum Start (Empty Query oder gespeichert)
+- [x] Suchliste Lupe entfernen (Nicht Möglich)
+- [x] Suchliste Grafik aufhübschen
 
 ### Langfristig
 
@@ -33,7 +33,7 @@
 ### Bis Freitag
 
 - [x] Location Marker
-- [ ] Grafik der Card anpassen
+- [x] Grafik der Card anpassen
 - [x] Save Button Grafisch
 
 ### Langfristig
