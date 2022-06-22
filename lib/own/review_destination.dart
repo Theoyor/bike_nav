@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:bike_nav/main.dart';
+import 'package:bike_nav/own/custom_bottom_sheet.dart';
 import 'package:bike_nav/own/search_bar_ui.dart';
 import 'package:bike_nav/screens/review_ride.dart';
 import 'package:bike_nav/widgets/marker.dart';
+import 'package:bike_nav/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -62,8 +64,6 @@ class _ReviewDestinationState extends State<ReviewDestination> {
   
   }
 
-
-
   _onMapCreated(MapboxMapController controller) async {
     _mapController = controller;
     controller.addListener(() {
@@ -90,8 +90,6 @@ class _ReviewDestinationState extends State<ReviewDestination> {
   _onCameraIdleCallback() {
     _updateMarkerPosition();
   }
-
-
 
   void _addMarkerStates(MarkerState markerState) {
     _markerStates.add(markerState);
@@ -131,8 +129,7 @@ class _ReviewDestinationState extends State<ReviewDestination> {
             onCameraIdle: _onCameraIdleCallback,
             onStyleLoadedCallback: _onStyleLoadedCallback,
             myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-          ),
-            
+          ),  
           IgnorePointer(
             ignoring: true,
             child: Stack(
@@ -140,25 +137,10 @@ class _ReviewDestinationState extends State<ReviewDestination> {
             )),
           Positioned(
             bottom: 0,
-            child: Container(
-        height: MediaQuery.of(context).size.height / 5,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Color.fromARGB(255, 110, 110, 110),
-                blurRadius: 4.0,
-                spreadRadius: 0.0,
-                offset: Offset(0.0, -2.0), // shadow direction: bottom right
-            )
-        ],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-        ),
-        child: Column(
+            child: CustomBottomSheet(
+              height: MediaQuery.of(context).size.height / 5,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
                 children: [
                   ListTile(
                     title: Text(
@@ -173,34 +155,18 @@ class _ReviewDestinationState extends State<ReviewDestination> {
                   ),
                   ButtonBar(
                     children: [
-                      TextButton.icon(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            )
-                          ),
-                          foregroundColor: MaterialStateProperty.all(Colors.white),
-                          backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed)){
-                              return Colors.blue.shade800;
-                            }
-                            return Colors.blue.shade700;
-                          }    
-                          ),
-
-                        ),
-                        onPressed: (){
-                          _handleStart();
-                        }, 
-                        icon: const Icon(Icons.fork_left),
-                        label: const Text("Find Route")
-                      )
+                    RoundedButton(
+                      borderRadius: 18.0, 
+                      onPressed: (){
+                        _handleStart();
+                      }, 
+                      icon: const Icon(Icons.fork_left), 
+                      label:  const Text("Find Route"))
                     ],
                   )
                 ],
               ),
-      ),
+            ),
 
           ),
           

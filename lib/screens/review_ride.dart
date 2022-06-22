@@ -90,7 +90,7 @@ class _ReviewRideState extends State<ReviewRide> {
         lineColor: Colors.indigo.toHexStringRGB(),
         lineCap: "round",
         lineJoin: "round",
-        lineWidth: 3,
+        lineWidth: 5,
       ),
     );
   }
@@ -119,7 +119,7 @@ class _ReviewRideState extends State<ReviewRide> {
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
               ),
             ),
-            reviewRideBottomSheet(context, distance, dropOffTime),
+            ReviewRideBottomSheet( distance:distance, dropOffTime: dropOffTime),
           ],
         ),
       ),

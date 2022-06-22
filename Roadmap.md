@@ -43,7 +43,7 @@
 ## View Route
 
 - [ ] Bottom Card Anpassen
-- [ ] Fahrrad Optimiert
+- [x] Fahrrad Optimiert
 - [ ] Top-Bar austauschen
 - [ ] Farben und Ziel-Start Marker anpassen
 

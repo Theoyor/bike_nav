@@ -20,7 +20,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
 
   List response = [];
   bool isLoading = false;
-
+  String lastQuery = "";
 
   @override
   void initState(){
@@ -33,6 +33,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
   _searchHandler(String query) async {
     setState(() {
       isLoading = true;
+      lastQuery = query;
     });
     getParsedResponseForQuery(query).then(
       (value) => {
@@ -58,7 +59,7 @@ class _SearchBarUIState extends State<SearchBarUI> {
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
-            hint: 'Search...',
+            hint: lastQuery == ""?  'Search...': lastQuery ,
             openAxisAlignment: 0.0,
             height: 55.0,
             axisAlignment:0.0,

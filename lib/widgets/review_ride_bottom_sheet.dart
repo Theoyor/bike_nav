@@ -1,60 +1,53 @@
+import 'package:bike_nav/own/custom_bottom_sheet.dart';
+import 'package:bike_nav/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/shared_prefs.dart';
 import '../screens/turn_by_turn.dart';
 
-Widget reviewRideBottomSheet(
-    BuildContext context, String distance, String dropOffTime) {
+
+
+class ReviewRideBottomSheet extends StatelessWidget{
+
+  final String distance;
+  final String dropOffTime;
+
+  ReviewRideBottomSheet({Key? key, required this.distance,required this.dropOffTime}) : super(key: key);
+  
   String sourceAddress = getSourceAndDestinationPlaceText('source');
   String destinationAddress = getSourceAndDestinationPlaceText('destination');
 
-  return Positioned(
+  @override
+  Widget build(BuildContext context){
+    return Positioned(
     bottom: 0,
-    child: SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
+    child: CustomBottomSheet(
+          height: MediaQuery.of(context).size.height / 5,
+          width: MediaQuery.of(context).size.width,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('$sourceAddress ➡ $destinationAddress',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(color: Colors.indigo)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: ListTile(
-                    tileColor: Colors.grey[200],
-                    leading: const Image(
-                        image: AssetImage('assets/image/sport-car.png'),
-                        height: 50,
-                        width: 50),
-                    title: const Text('Premier',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    subtitle: Text('$distance km, $dropOffTime drop off'),
-                    trailing: const Text('\$384.22',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18)),
-                  ),
+                ListTile(
+                  title: Text('$sourceAddress ➡ $destinationAddress'),
+                  subtitle: Text('$distance km, $dropOffTime drop off'),
                 ),
-                ElevatedButton(
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const TurnByTurn())),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(20)),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text('Start your premier ride now'),
-                        ])),
+
+                ButtonBar(
+                  children: [
+                    RoundedButton(
+                      borderRadius: 18.0, 
+                      onPressed:
+                        () => Navigator.push(context,MaterialPageRoute(builder: (_) => const TurnByTurn())), 
+                      icon: const Icon(Icons.navigation), 
+                      label: const Text("Start Navigation")
+                    )
+                    ],
+                ),
               ]),
         ),
-      ),
-    ),
-  );
+      );
+   
+  }
 }
+
