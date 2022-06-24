@@ -53,17 +53,20 @@
 
 ## Navigation
 
-### Bis Freitag
-
-- [ ] Navigation Beenden
-- [ ] Buttons richtig anordnen
-- [ ] Wechsel zur Easy Navigation
-- [ ] Top-Bar anpassen
-- [ ] Tilt Anpassen
-
-### Langfristig
-
-- [ ] Automatische Routenneuplanung
+- [ ] Komplett neu bauen
+- [ ] API call
+  - [x] für distance und time
+  - [ ] für komplette Route mit Hinweisen
+- [ ] Information Cards
+  - [ ] Top Card
+  - [ ] Bottom Card
+  - [ ] Symbole einfügen
+- [ ] Funktionalitäten
+  - [ ] Von Route Abweichen
+  - [ ] Karten Aktualisieren
+  - [ ] Zusatzinformationen anzeigen
+- [ ] Ansicht
+  - [ ] Verschieben
 
 ## Easy Navigation
 
