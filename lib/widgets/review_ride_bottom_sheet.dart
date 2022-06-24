@@ -1,9 +1,11 @@
+import 'package:bike_nav/helpers/mapbox_handler.dart';
+import 'package:bike_nav/navigation/nav_screen.dart';
 import 'package:bike_nav/own/custom_bottom_sheet.dart';
 import 'package:bike_nav/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mapbox_gl/mapbox_gl.dart';
 import '../helpers/shared_prefs.dart';
-import '../screens/turn_by_turn.dart';
+
 
 
 
@@ -16,6 +18,17 @@ class ReviewRideBottomSheet extends StatelessWidget{
   
   String sourceAddress = getSourceAndDestinationPlaceText('source');
   String destinationAddress = getSourceAndDestinationPlaceText('destination');
+
+  _handleStartButtonPressed(BuildContext context) async {
+
+    LatLng sourceLatLng = getCurrentLatLngFromSharedPrefs();
+    LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
+    Map modifiedResponse = await getNavDirectionsAPIResponse(sourceLatLng, destinationLatLng);
+    //if (!mounted) return;
+
+    Navigator.push(context,MaterialPageRoute(builder: (_) => NavScreen(modifiedResponse: modifiedResponse,))); 
+  }
+
 
   @override
   Widget build(BuildContext context){
@@ -37,8 +50,7 @@ class ReviewRideBottomSheet extends StatelessWidget{
                   children: [
                     RoundedButton(
                       borderRadius: 18.0, 
-                      onPressed:
-                        () => Navigator.push(context,MaterialPageRoute(builder: (_) => const TurnByTurn())), 
+                      onPressed: (){_handleStartButtonPressed(context);},
                       icon: const Icon(Icons.navigation), 
                       label: const Text("Start Navigation")
                     )

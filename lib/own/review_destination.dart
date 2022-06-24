@@ -13,9 +13,6 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:bike_nav/helpers/mapbox_handler.dart';
 import 'package:bike_nav/helpers/shared_prefs.dart';
 
-import '../helpers/commons.dart';
-import '../widgets/review_ride_bottom_sheet.dart';
-
 class ReviewDestination extends StatefulWidget {
   const ReviewDestination({Key? key})
       : super(key: key);
