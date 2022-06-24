@@ -41,14 +41,17 @@ class _TurnByTurnState extends State<TurnByTurn> {
     // Setup directions and options
     directions = MapBoxNavigation(onRouteEvent: _onRouteEvent);
     _options = MapBoxOptions(
-        zoom: 18.0,
-        voiceInstructionsEnabled: true,
-        bannerInstructionsEnabled: true,
-        mode: MapBoxNavigationMode.cycling,
-        isOptimized: true,
-        units: VoiceUnits.metric,
-        simulateRoute: true,
-        language: "en");
+      initialLatitude: getTripLatLngFromSharedPrefs("source").latitude,
+      initialLongitude: getTripLatLngFromSharedPrefs("source").longitude,
+      zoom: 18.0,
+      voiceInstructionsEnabled: true,
+      bannerInstructionsEnabled: true,
+      mode: MapBoxNavigationMode.cycling,
+      isOptimized: true,
+      units: VoiceUnits.metric,
+      simulateRoute: true,
+      language: "en" 
+    );
 
     // Configure waypoints
     sourceWaypoint = WayPoint(
