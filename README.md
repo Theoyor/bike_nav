@@ -4,11 +4,6 @@
 
 Aktuell nur auf Android Lauffähig
 
-## Heuristischer Test
-
-Entweder Projekt selbst bauen wie in [Setup](Setup) beschrieben, oder APK-Datei in [/heuristic_testing](/heuristic_testing) herunterladen
-
-
 ## Setup
 
 
