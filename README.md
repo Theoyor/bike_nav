@@ -4,6 +4,11 @@
 
 Aktuell nur auf Android Lauffähig
 
+## Heuristischer Test
+
+Entwickler Anfragen für eine APK.
+
+
 ## Setup
 
 
