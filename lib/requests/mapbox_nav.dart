@@ -14,7 +14,7 @@ Dio _dio = Dio();
 Future getFullCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
   String url =
       '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=true&banner_instructions=true&continue_straight=true&geometries=geojson&language=en&overview=full&roundabout_exits=true&steps=true&access_token=$accessToken';
-      print(url);
+    print("getFullCyclingRouteUsingMapbox: $url");
   try {
     _dio.options.contentType = Headers.jsonContentType;
     final responseData = await _dio.get(url);
@@ -28,7 +28,7 @@ Future getFullCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
 Future getTimeDistanceCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
   String url =
       '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=false&continue_straight=true&geometries=geojson&overview=simplified&steps=false&access_token=$accessToken';
-      print(url);
+      print("getTimeDistanceCyclingRouteUsingMapbox: $url");
   try {
     _dio.options.contentType = Headers.jsonContentType;
     final responseData = await _dio.get(url);

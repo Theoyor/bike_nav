@@ -147,20 +147,12 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        label: easyNavToggled ? const Text('Standard Map') : const Text('Bike Map'),
-        icon: easyNavToggled ? const Icon(Icons.map) : const Icon(Icons.directions_bike),
-        
-        onPressed: (() {
-          setState(() {
-            easyNavToggled = !easyNavToggled;
-          });
-        }),
-      ),
+      //floatingActionButtonLocation: CustomFabLoc(),
+      
       body: SafeArea(
         child: Stack(
           children: [
+            
             SizedBox(
               height: MediaQuery.of(context).size.height,
               child: MapboxMap(
@@ -174,16 +166,45 @@ class _NavScreenState extends State<NavScreen> {
               ),
             ),
             if (easyNavToggled ) EasyNav(step: navController.latestStep),
-
-            
+            Positioned(
+              top:  MediaQuery.of(context).size.height * 0.125,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.75,
+                width: MediaQuery.of(context).size.width,
+              ),
+            ), 
             NavTopCard(
               bannerInstructions: navController.getBannerInstruction(), 
               distanceToNextStep: navController.userDistanceToNextStep
             ),
             NavBottomCard( timeDist: navController.timeDist),
+            Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.125 + 10,
+              right: 5,
+              child: FloatingActionButton.extended(
+              
+              label: easyNavToggled ? const Text('Standard Map') : const Text('Bike Map'),
+              icon: easyNavToggled ? const Icon(Icons.map) : const Icon(Icons.directions_bike),
+              onPressed: (() {
+                setState(() {
+                  easyNavToggled = !easyNavToggled;
+                });
+              }),
+             ),)
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class CustomFabLoc extends FloatingActionButtonLocation {
+  @override
+  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
+    return Offset(
+      scaffoldGeometry.scaffoldSize.width * .5, ///customize here
+      scaffoldGeometry.scaffoldSize.height * 0.8,
     );
   }
 }

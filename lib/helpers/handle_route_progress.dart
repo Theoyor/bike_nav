@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bike_nav/helpers/mapbox_handler.dart';
+import 'package:bike_nav/helpers/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart' as ltlg;
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -85,7 +86,7 @@ class NavigationController {
     userDistanceToNextStep = _getDistFromUserLocation(nextStepLatLng).round();
 
     if (allowCalls){
-      timeDist = await getRemainingTimeDistanceAPIResponse(userLocation, LatLng(nextStepLatLng.latitude, nextStepLatLng.longitude));
+      timeDist = await getRemainingTimeDistanceAPIResponse(userLocation, getTripLatLngFromSharedPrefs("destination"));
       updateInstructions();
       allowCalls = false;
     }

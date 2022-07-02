@@ -8,17 +8,27 @@ class EasyNav extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Positioned(
-      top: MediaQuery.of(context).size.height * 0.125,
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.75,
-        width: MediaQuery.of(context).size.width,
-        child: Image(
-          image: AssetImage("assets/generated/$step")
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(color: Colors.white),
         ),
-      )    
+        Positioned(
+          top: MediaQuery.of(context).size.height * 0.125,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.75,
+            width: MediaQuery.of(context).size.width,
+            child: Image(
+              image: AssetImage("assets/generated/$step.png")
+            ),
+          )    
+        ),
+      ],
     );
+    
+    
     
   }
 

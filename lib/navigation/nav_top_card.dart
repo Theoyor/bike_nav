@@ -24,7 +24,7 @@ class NavTopCard extends StatelessWidget{
     return Positioned(
     top: 0,
     child: Container(
-          height: MediaQuery.of(context).size.width / 4,
+          height: MediaQuery.of(context).size.height / 8,
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -43,7 +43,7 @@ class NavTopCard extends StatelessWidget{
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height / 8,
-                  width: MediaQuery.of(context).size.height / 8,
+                  width: MediaQuery.of(context).size.width / 4,
                   child: getFittingDirectionSymbol(
                     bannerInstructions["primary"]["type"], 
                     bannerInstructions["primary"]["modifier"]
@@ -52,7 +52,7 @@ class NavTopCard extends StatelessWidget{
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: ListTile(
-                    title: Text('${bannerInstructions["primary"]["text"]} in ${displayDistance(distanceToNextStep)}} km'),
+                    title: Text('${bannerInstructions["primary"]["text"]} in ${displayDistance(distanceToNextStep)}'),
                   ),
                 )
                 
