@@ -1,4 +1,5 @@
 import 'package:bike_nav/helpers/handle_route_progress.dart';
+import 'package:bike_nav/navigation/easy_nav.dart';
 import 'package:bike_nav/navigation/nav_bottom_card.dart';
 import 'package:bike_nav/navigation/nav_top_card.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,10 @@ class NavScreen extends StatefulWidget {
 }
 
 class _NavScreenState extends State<NavScreen> {
+
+  // view related
+  bool easyNavToggled = false;
+
   // Mapbox Maps SDK related
   final List<CameraPosition> _kTripEndPoints = [];
   late MapboxMapController controller;
@@ -157,6 +162,7 @@ class _NavScreenState extends State<NavScreen> {
                 trackCameraPosition: true,
               ),
             ),
+            if (easyNavToggled ) EasyNav(step: navController.latestStep),
             NavTopCard(
               bannerInstructions: navController.getBannerInstruction(), 
               distanceToNextStep: navController.userDistanceToNextStep

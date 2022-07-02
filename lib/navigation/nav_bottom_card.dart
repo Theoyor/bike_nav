@@ -35,7 +35,7 @@ class NavBottomCard extends StatelessWidget{
     return Positioned(
     bottom: 0,
     child: CustomBottomSheet(
-          height: MediaQuery.of(context).size.height / 7,
+          height: MediaQuery.of(context).size.height / 8,
           width: MediaQuery.of(context).size.width,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,12 +44,7 @@ class NavBottomCard extends StatelessWidget{
                 ListTile(
                   title: Text('${timeDist["duration"]} min, (${timeDist["distance"]} m)'),
                   subtitle: Text('Arrival at ${getDropOffTime(timeDist["duration"])}'),
-                ),
-
-                ButtonBar(
-                  children: [
-                    IconButton(onPressed: (){_handleStopButtonPressed(context);}, icon: const Icon(Icons.clear))
-                    ],
+                  trailing: IconButton(onPressed: (){_handleStopButtonPressed(context);}, icon: const Icon(Icons.clear)) ,
                 ),
               ]),
         ),

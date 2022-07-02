@@ -55,6 +55,7 @@
 
 ### Bis Freitag
 
+- [ ] Finish Navigation
 
 ### Langfristig
 
@@ -62,6 +63,12 @@
 - [ ] Ongoing notification
 - [ ] Smarter Step planning
 - [ ] Besseres Navigationsicon
+
+
+### Known Bugs
+
+- [ ] Falsche Kartenausrichtung
+- [ ] Route wird sofort abgelaufen
 
 ## Easy Navigation
 
