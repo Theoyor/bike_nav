@@ -147,6 +147,17 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        label: easyNavToggled ? const Text('Standard Map') : const Text('Bike Map'),
+        icon: easyNavToggled ? const Icon(Icons.map) : const Icon(Icons.directions_bike),
+        
+        onPressed: (() {
+          setState(() {
+            easyNavToggled = !easyNavToggled;
+          });
+        }),
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -163,6 +174,8 @@ class _NavScreenState extends State<NavScreen> {
               ),
             ),
             if (easyNavToggled ) EasyNav(step: navController.latestStep),
+
+            
             NavTopCard(
               bannerInstructions: navController.getBannerInstruction(), 
               distanceToNextStep: navController.userDistanceToNextStep
