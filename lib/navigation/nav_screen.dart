@@ -63,7 +63,7 @@ class _NavScreenState extends State<NavScreen> {
       userLocation: getCurrentLatLngFromSharedPrefs(),
       steps: widget.modifiedResponse['steps'],
       timeDist: {
-        "distance" : (widget.modifiedResponse['distance'] / 1000).toStringAsFixed(1),
+        "distance" : widget.modifiedResponse['distance'],
         "duration" : widget.modifiedResponse['duration'],
       }, 
       updateInstructions: updateInstructions

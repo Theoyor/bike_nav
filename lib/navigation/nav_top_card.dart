@@ -1,4 +1,5 @@
 import 'package:bike_nav/helpers/commons.dart';
+import 'package:bike_nav/helpers/display_distance.dart';
 import 'package:bike_nav/helpers/mapbox_handler.dart';
 import 'package:bike_nav/main.dart';
 import 'package:bike_nav/navigation/nav_screen.dart';
@@ -23,7 +24,7 @@ class NavTopCard extends StatelessWidget{
     return Positioned(
     top: 0,
     child: Container(
-          height: MediaQuery.of(context).size.height / 8,
+          height: MediaQuery.of(context).size.width / 4,
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -51,7 +52,7 @@ class NavTopCard extends StatelessWidget{
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: ListTile(
-                    title: Text('${bannerInstructions["primary"]["text"]} in ${distanceToNextStep/1000} km'),
+                    title: Text('${bannerInstructions["primary"]["text"]} in ${displayDistance(distanceToNextStep)}} km'),
                   ),
                 )
                 

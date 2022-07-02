@@ -1,4 +1,5 @@
 import 'package:bike_nav/helpers/commons.dart';
+import 'package:bike_nav/helpers/display_distance.dart';
 import 'package:bike_nav/helpers/mapbox_handler.dart';
 import 'package:bike_nav/main.dart';
 import 'package:bike_nav/navigation/nav_screen.dart';
@@ -29,7 +30,6 @@ class NavBottomCard extends StatelessWidget{
       );
     }
 
-
   @override
   Widget build(BuildContext context){
     return Positioned(
@@ -42,9 +42,10 @@ class NavBottomCard extends StatelessWidget{
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  title: Text('${timeDist["duration"]} min, (${timeDist["distance"]} m)'),
+                  title: Text('${(timeDist["duration"]/60).round()} min, ${displayDistance(timeDist["distance"])}')
+                    ,
                   subtitle: Text('Arrival at ${getDropOffTime(timeDist["duration"])}'),
-                  trailing: IconButton(onPressed: (){_handleStopButtonPressed(context);}, icon: const Icon(Icons.clear)) ,
+                  trailing: IconButton(onPressed: (){ _handleStopButtonPressed(context);}, icon: const Icon(Icons.clear)) ,
                 ),
               ]),
         ),
