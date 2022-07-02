@@ -85,11 +85,13 @@ Future<Map> getNavDirectionsAPIResponse(
   Map geometry = response['routes'][0]['geometry'];
   num duration = response['routes'][0]['duration'];
   num distance = response['routes'][0]['distance'];
+  List<dynamic> steps = response['routes'][0]['legs'][0]['steps'];
 
   Map modifiedResponse = {
     "geometry": geometry,
     "duration": duration,
     "distance": distance,
+    "steps": steps,
   };
   return modifiedResponse;
 }

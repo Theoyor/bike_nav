@@ -1,4 +1,6 @@
 import 'package:bike_nav/helpers/handle_route_progress.dart';
+import 'package:bike_nav/navigation/nav_bottom_card.dart';
+import 'package:bike_nav/navigation/nav_top_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -22,16 +24,16 @@ class _NavScreenState extends State<NavScreen> {
   final List<CameraPosition> _kTripEndPoints = [];
   late MapboxMapController controller;
   late CameraPosition _initialCameraPosition;
+  bool _myLocationEnabled = false;
 
   // Directions API response related
-  late String distance;
-  late String dropOffTime;
   late Map geometry;
+  late NavigationController navController; 
 
   @override
   void initState() {
     // initialise distance, dropOffTime, geometry
-    _initialiseDirectionsResponse();
+    _initialiseNavController();
 
     // initialise initialCameraPosition, address and trip end points
     _initialCameraPosition = CameraPosition(target: getCurrentLatLngFromSharedPrefs(), zoom: 16);
@@ -43,15 +45,38 @@ class _NavScreenState extends State<NavScreen> {
     super.initState();
   }
 
-  _initialiseDirectionsResponse() {
-    distance = (widget.modifiedResponse['distance'] / 1000).toStringAsFixed(1);
-    dropOffTime = getDropOffTime(widget.modifiedResponse['duration']);
+    updateInstructions(){
+    setState(() {
+    });
+  }
+
+
+  _initialiseNavController() {
+    navController = NavigationController(
+      latestStep: 0,
+      nextStep: 1,
+      userLocation: getCurrentLatLngFromSharedPrefs(),
+      steps: widget.modifiedResponse['steps'],
+      timeDist: {
+        "distance" : (widget.modifiedResponse['distance'] / 1000).toStringAsFixed(1),
+        "duration" : widget.modifiedResponse['duration'],
+      }, 
+      updateInstructions: updateInstructions
+    );
+    
     geometry = widget.modifiedResponse['geometry'];
   }
 
+
   _onMapCreated(MapboxMapController controller) async {
+    
     this.controller = controller;
+    setState(() {
+      _myLocationEnabled = true;
+    });
+  
   }
+
 
   _onStyleLoadedCallback() async {
     for (int i = 0; i < _kTripEndPoints.length; i++) {
@@ -69,15 +94,21 @@ class _NavScreenState extends State<NavScreen> {
 
 
   _onUserLocationUpdate(UserLocation userLocation){
+
+    print("UserLocation PRE: bearing: ${userLocation.bearing} location: ${userLocation.position}");
+    print("CameraPosition PRE: ${controller.cameraPosition}");
     controller.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: userLocation.position, 
-          bearing: userLocation.bearing ?? 0.0,
+          bearing: userLocation.bearing ?? controller.cameraPosition?.bearing ?? 0.0,
+          zoom: controller.cameraPosition?.zoom ?? 16,
         ))
     );
-    handleRouteProgress(userLocation, controller);
-
+    
+    navController.handleRouteProgress(userLocation.position, controller);
+    print("UserLocation POST: bearing: ${userLocation.bearing} location: ${userLocation.position}");
+    print("CameraPosition POST: ${controller.cameraPosition}");
   }
 
   _addSourceAndLineLayer() async {
@@ -111,14 +142,6 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back)),
-        title: const Text('Review Ride'),
-      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -128,12 +151,17 @@ class _NavScreenState extends State<NavScreen> {
                 accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
-                myLocationEnabled: true,
+                myLocationEnabled: _myLocationEnabled,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 onUserLocationUpdated: _onUserLocationUpdate,
+                trackCameraPosition: true,
               ),
             ),
-            ReviewRideBottomSheet( distance:distance, dropOffTime: dropOffTime),
+            NavTopCard(
+              bannerInstructions: navController.getBannerInstruction(), 
+              distanceToNextStep: navController.userDistanceToNextStep
+            ),
+            NavBottomCard( timeDist: navController.timeDist),
           ],
         ),
       ),

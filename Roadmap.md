@@ -51,19 +51,17 @@
 
 - [ ] Alternative Routen
 
-## Navigation
+## Navigation neu geschreiben
 
 ### Bis Freitag
 
-- [ ] Navigation Beenden
-- [ ] Buttons richtig anordnen
-- [ ] Wechsel zur Easy Navigation
-- [ ] Top-Bar anpassen
-- [ ] Tilt Anpassen
 
 ### Langfristig
 
 - [ ] Automatische Routenneuplanung
+- [ ] Ongoing notification
+- [ ] Smarter Step planning
+- [ ] Besseres Navigationsicon
 
 ## Easy Navigation
 

@@ -13,7 +13,7 @@ Dio _dio = Dio();
 
 Future getFullCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
   String url =
-      '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=true&annotations=distance,duration&banner_instructions=true&continue_straight=true&geometries=geojson&language=en&overview=full&roundabout_exits=true&steps=true&access_token=$accessToken';
+      '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=true&banner_instructions=true&continue_straight=true&geometries=geojson&language=en&overview=full&roundabout_exits=true&steps=true&access_token=$accessToken';
       print(url);
   try {
     _dio.options.contentType = Headers.jsonContentType;
