@@ -57,7 +57,7 @@ final response =  Map<String, dynamic>.from(await getReverseGeocodingGivenLatLng
 // ----------------------------- Mapbox Directions API -----------------------------
 Future<Map> getDirectionsAPIResponse(
     LatLng sourceLatLng, LatLng destinationLatLng) async {
-  final response = await getCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
+  final response = await getTimeDistanceCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
   
   Map geometry = response['routes'][0]['geometry'];
   num duration = response['routes'][0]['duration'];

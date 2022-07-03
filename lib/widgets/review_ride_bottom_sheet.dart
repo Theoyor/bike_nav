@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bike_nav/helpers/mapbox_handler.dart';
 import 'package:bike_nav/navigation/nav_screen.dart';
 import 'package:bike_nav/own/custom_bottom_sheet.dart';
@@ -42,8 +44,24 @@ class ReviewRideBottomSheet extends StatelessWidget{
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  title: Text('$sourceAddress ➡ $destinationAddress'),
-                  subtitle: Text('$distance km, $dropOffTime drop off'),
+                  leading: Transform.rotate(
+                    angle: 180 * pi / 180,
+                    child: const Icon(
+                        Icons.turn_left,
+                        color: Colors.black,
+                        size: 50,
+
+                      ),
+                    ), 
+                  title: Text(
+                    '$sourceAddress\n$destinationAddress',
+                    style: const  TextStyle(
+                        fontSize: 20,
+                        //fontWeight: FontWeight.bold,
+                        height: 1.2,
+                    ),
+                    ),
+                  subtitle: Text('$distance km, Arrival at $dropOffTime'),
                 ),
 
                 ButtonBar(
