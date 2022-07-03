@@ -2,6 +2,7 @@ import 'package:bike_nav/helpers/commons.dart';
 import 'package:bike_nav/helpers/display_distance.dart';
 import 'package:bike_nav/helpers/mapbox_handler.dart';
 import 'package:bike_nav/main.dart';
+import 'package:bike_nav/navigation/get_nav_icon.dart';
 import 'package:bike_nav/navigation/nav_screen.dart';
 import 'package:bike_nav/own/custom_bottom_sheet.dart';
 import 'package:bike_nav/widgets/rounded_button.dart';
@@ -41,18 +42,20 @@ class NavTopCard extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 8,
-                  width: MediaQuery.of(context).size.width / 4,
-                  child: getFittingDirectionSymbol(
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: ListTile(
+                    leading: getFittingDirectionSymbol(
                     bannerInstructions["primary"]["type"], 
                     bannerInstructions["primary"]["modifier"]
                   ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  child: ListTile(
-                    title: Text('${bannerInstructions["primary"]["text"]} in ${displayDistance(distanceToNextStep)}'),
+                    title: Text(
+                      '${bannerInstructions["primary"]["text"]} in ${displayDistance(distanceToNextStep)}',
+                      style: const  TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                    ),
+                    ),
                   ),
                 )
                 
@@ -62,11 +65,5 @@ class NavTopCard extends StatelessWidget{
       );
    
   }
-}
-
-Widget getFittingDirectionSymbol(String type, String modifier){
-  // normally Return an Icon or Image
-  return Text("$type\n$modifier");
-
 }
 

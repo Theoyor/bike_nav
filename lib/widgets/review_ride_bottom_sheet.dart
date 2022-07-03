@@ -57,7 +57,6 @@ class ReviewRideBottomSheet extends StatelessWidget{
                     '$sourceAddress\n$destinationAddress',
                     style: const  TextStyle(
                         fontSize: 20,
-                        //fontWeight: FontWeight.bold,
                         height: 1.2,
                     ),
                     ),

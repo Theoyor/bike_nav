@@ -27,7 +27,7 @@ Future getFullCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
 
 Future getTimeDistanceCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
   String url =
-      '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=false&continue_straight=true&geometries=geojson&overview=simplified&steps=false&access_token=$accessToken';
+      '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=false&continue_straight=true&geometries=geojson&overview=full&steps=false&access_token=$accessToken';
       print("getTimeDistanceCyclingRouteUsingMapbox: $url");
   try {
     _dio.options.contentType = Headers.jsonContentType;

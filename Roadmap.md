@@ -44,7 +44,7 @@
 
 - [x] Bottom Card Anpassen
 - [x] Fahrrad Optimiert
-- [ ] Top-Bar austauschen
+- [x] Top-Bar austauschen
 - [ ] Farben und Ziel-Start Marker anpassen
 
 ### Langfristig
@@ -55,7 +55,9 @@
 
 ### Bis Freitag
 
-- [ ] Finish Navigation
+- [x] Finish Navigation
+- [x] Navigation funktioniert
+- [x] Einbindung Easy Navigation
 
 ### Langfristig
 
@@ -64,24 +66,25 @@
 - [ ] Smarter Step planning
 - [ ] Besseres Navigationsicon
 
-
 ### Known Bugs
 
 - [ ] Falsche Kartenausrichtung
 - [ ] Route wird sofort abgelaufen
+- [ ] Text Overflow wird nicht sinnvoll behandelt
+  - [ ] Realisiertbar mit Mapbox abbr
 
 ## Easy Navigation
 
 ### Bis Freitag
 
-- [ ] Handler Widget erstellen
-- [ ] Dummies Erstellen
-- [ ] Anzeige über Sperrbildschir
+- [x] Handler Widget erstellen
+- [x] Dummies Erstellen
+- [ ] Anzeige über Sperrbildschirm
 
 ### Langfristig
 
 - [ ] Nicht-Statisch
-- [ ] Ongoing-Notification Anpassen
+- [ ] Ongoing-Notification
 
 ## Rate your Ride
 
