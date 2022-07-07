@@ -1,8 +1,9 @@
+import 'package:bike_nav/main.dart';
+import 'package:bike_nav/own/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:bike_nav/helpers/shared_prefs.dart';
-import 'package:bike_nav/ui/rate_ride.dart';
 
 class TurnByTurn extends StatefulWidget {
   const TurnByTurn({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class _TurnByTurnState extends State<TurnByTurn> {
 
   @override
   Widget build(BuildContext context) {
-    return const RateRide();
+    return const Scaffold();
   }
 
   Future<void> _onRouteEvent(e) async {
@@ -102,9 +103,12 @@ class _TurnByTurnState extends State<TurnByTurn> {
         } else {}
         break;
       case MapBoxEvent.navigation_finished:
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Frame()), (Route<dynamic> route) => false);
+        break;
       case MapBoxEvent.navigation_cancelled:
         routeBuilt = false;
         isNavigating = false;
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Frame()), (Route<dynamic> route) => false);
         break;
       default:
         break;

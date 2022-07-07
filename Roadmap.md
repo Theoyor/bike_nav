@@ -53,6 +53,7 @@
 
 ## Navigation neu geschreiben
 
+
 ### Bis Freitag
 
 - [x] Finish Navigation
@@ -72,6 +73,7 @@
 - [ ] Route wird sofort abgelaufen
 - [ ] Text Overflow wird nicht sinnvoll behandelt
   - [ ] Realisiertbar mit Mapbox abbr
+
 
 ## Easy Navigation
 
