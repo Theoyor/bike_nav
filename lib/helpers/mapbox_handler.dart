@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
 
+import 'package:bike_nav/requests/mapbox_nav.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../requests/mapbox_directions.dart';
@@ -56,7 +57,7 @@ final response =  Map<String, dynamic>.from(await getReverseGeocodingGivenLatLng
 // ----------------------------- Mapbox Directions API -----------------------------
 Future<Map> getDirectionsAPIResponse(
     LatLng sourceLatLng, LatLng destinationLatLng) async {
-  final response = await getCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
+  final response = await getTimeDistanceCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
   
   Map geometry = response['routes'][0]['geometry'];
   num duration = response['routes'][0]['duration'];
@@ -74,4 +75,37 @@ LatLng getCenterCoordinatesForPolyline(Map geometry) {
   List coordinates = geometry['coordinates'];
   int pos = (coordinates.length / 2).round();
   return LatLng(coordinates[pos][1], coordinates[pos][0]);
+}
+
+// for Navigation
+Future<Map> getNavDirectionsAPIResponse(
+    LatLng sourceLatLng, LatLng destinationLatLng) async {
+  final response = await getFullCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
+  
+  Map geometry = response['routes'][0]['geometry'];
+  num duration = response['routes'][0]['duration'];
+  num distance = response['routes'][0]['distance'];
+  List<dynamic> steps = response['routes'][0]['legs'][0]['steps'];
+
+  Map modifiedResponse = {
+    "geometry": geometry,
+    "duration": duration,
+    "distance": distance,
+    "steps": steps,
+  };
+  return modifiedResponse;
+}
+
+Future<Map> getRemainingTimeDistanceAPIResponse(
+    LatLng sourceLatLng, LatLng destinationLatLng) async {
+  final response = await getTimeDistanceCyclingRouteUsingMapbox(sourceLatLng, destinationLatLng);
+  
+  num duration = response['routes'][0]['duration'];
+  num distance = response['routes'][0]['distance'];
+
+  Map modifiedResponse = {
+    "duration": duration,
+    "distance": distance,
+  };
+  return modifiedResponse;
 }

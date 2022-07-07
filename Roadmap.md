@@ -44,42 +44,49 @@
 
 - [x] Bottom Card Anpassen
 - [x] Fahrrad Optimiert
-- [ ] Top-Bar austauschen
+- [x] Top-Bar austauschen
 - [ ] Farben und Ziel-Start Marker anpassen
 
 ### Langfristig
 
 - [ ] Alternative Routen
 
-## Navigation
+## Navigation neu geschreiben
 
-- [ ] Komplett neu bauen
-- [ ] API call
-  - [x] für distance und time
-  - [ ] für komplette Route mit Hinweisen
-- [ ] Information Cards
-  - [ ] Top Card
-  - [ ] Bottom Card
-  - [ ] Symbole einfügen
-- [ ] Funktionalitäten
-  - [ ] Von Route Abweichen
-  - [ ] Karten Aktualisieren
-  - [ ] Zusatzinformationen anzeigen
-- [ ] Ansicht
-  - [ ] Verschieben
+
+### Bis Freitag
+
+- [x] Finish Navigation
+- [x] Navigation funktioniert
+- [x] Einbindung Easy Navigation
+
+### Langfristig
+
+- [ ] Automatische Routenneuplanung
+- [ ] Ongoing notification
+- [ ] Smarter Step planning
+- [ ] Besseres Navigationsicon
+
+### Known Bugs
+
+- [ ] Falsche Kartenausrichtung
+- [ ] Route wird sofort abgelaufen
+- [ ] Text Overflow wird nicht sinnvoll behandelt
+  - [ ] Realisiertbar mit Mapbox abbr
+
 
 ## Easy Navigation
 
 ### Bis Freitag
 
-- [ ] Handler Widget erstellen
-- [ ] Dummies Erstellen
-- [ ] Anzeige über Sperrbildschir
+- [x] Handler Widget erstellen
+- [x] Dummies Erstellen
+- [ ] Anzeige über Sperrbildschirm
 
 ### Langfristig
 
 - [ ] Nicht-Statisch
-- [ ] Ongoing-Notification Anpassen
+- [ ] Ongoing-Notification
 
 ## Rate your Ride
 

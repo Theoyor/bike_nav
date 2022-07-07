@@ -98,16 +98,8 @@ class _ReviewRideState extends State<ReviewRide> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back)),
-        title: const Text('Review Ride'),
-      ),
-      body: SafeArea(
-        child: Stack(
+      
+      body: Stack(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height,
@@ -120,9 +112,23 @@ class _ReviewRideState extends State<ReviewRide> {
               ),
             ),
             ReviewRideBottomSheet( distance:distance, dropOffTime: dropOffTime),
+            Positioned(
+              top: 35 ,
+              left: 5,
+              child: FloatingActionButton(
+                backgroundColor: Colors.white,
+                onPressed: (() {
+                  Navigator.of(context).pop();
+                }),
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              ),
+            ),
           ],
         ),
-      ),
+      
     );
   }
 }
